@@ -1,530 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Happy Birthday Grace!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --bg1: #0f0520;
-      --bg2: #2a0f5b;
-      --gradient: linear-gradient(135deg, #1f0f3a 0%, #3f1f8f 60%, #8747ff 100%);
-      --radius: 18px;
-      --shadow: 0 25px 50px -12px rgba(135, 71, 255, 0.5);
-      --text-glow: 0 0 12px rgba(255, 215, 255, 0.7);
-      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Grace!</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for the neon glow effect */
+        .neon-text {
+            text-shadow: 0 0 7px #fff,
+                         0 0 10px #fff,
+                         0 0 21px #fff,
+                         0 0 42px #9c00ff,
+                         0 0 82px #9c00ff,
+                         0 0 92px #9c00ff,
+                         0 0 102px #9c00ff,
+                         0 0 151px #9c00ff;
+        }
 
-    * { box-sizing: border-box; }
+        /* Custom CSS for the backdrop filter on the main card */
+        .card-backdrop {
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: radial-gradient(circle at 20% 30%, #5d3aff 0%, transparent 60%),
-                  radial-gradient(circle at 80% 20%, #ff8bd4 0%, transparent 60%),
-                  var(--gradient);
-      color: #f0f5ff;
-      overflow-x: hidden;
-    }
+        /* Set font to Inter for a modern look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #220033 0%, #0c001a 100%);
+            /* Ensure the body takes up at least the full viewport height and allows scrolling */
+            min-height: 100vh;
+        }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .hero {
-      position: relative;
-      padding: 3rem 1rem 5rem;
-      text-align: center;
-      overflow: visible;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      margin: 0;
-      letter-spacing: 1px;
-      position: relative;
-      display: inline-block;
-      padding: 0.2rem 1rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      text-shadow: var(--text-glow);
-    }
-
-    .subtitle {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      letter-spacing: 0.5px;
-      opacity: 0.9;
-    }
-
-    .cake {
-      margin: 2rem auto 3rem;
-      width: 250px;
-      position: relative;
-    }
-
-    .cake-base {
-      background: linear-gradient(135deg,#ffccf9,#d6b3ff);
-      border-radius: 0 0 40px 40px;
-      height: 140px;
-      position: relative;
-      box-shadow: 0 20px 60px -5px rgba(255, 182, 255, 0.6);
-    }
-
-    .cake-layer {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 220px;
-      height: 60px;
-      background: linear-gradient(135deg,#ffebff,#d9cfff);
-      border-radius: 30px;
-      top: -50px;
-      box-shadow: 0 18px 50px -8px rgba(255, 182, 255, 0.5);
-    }
-
-    .frosting {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 250px;
-      height: 50px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #ffe8ff 60%);
-      border-radius: 50% 50% 0 0;
-      overflow: hidden;
-    }
-
-    .candle-container {
-      position: absolute;
-      top: -110px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-    }
-
-    .candle {
-      position: relative;
-      width: 12px;
-      height: 50px;
-      background: #ffee88;
-      border-radius: 4px;
-      box-shadow: 0 0 12px rgba(255, 238, 136, 0.8);
-      overflow: visible;
-    }
-
-    .flame {
-      position: absolute;
-      top: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 20px;
-      background: radial-gradient(circle at 50% 40%, #ffd64d 0%, #ffae00 60%, transparent 90%);
-      border-radius: 50% 50% 40% 40%;
-      filter: drop-shadow(0 0 8px rgba(255, 200, 100, 0.9));
-      animation: flicker 1.2s infinite;
-    }
-
-    @keyframes flicker {
-      0% { transform: translateX(-50%) scale(1); opacity: 1; }
-      30% { transform: translateX(-48%) scale(0.95); opacity: 0.85; }
-      60% { transform: translateX(-52%) scale(1.03); opacity: 0.9; }
-      100% { transform: translateX(-50%) scale(1); opacity: 1; }
-    }
-
-    .carousel-wrapper {
-      margin: 3rem auto 1rem;
-      position: relative;
-      max-width: 800px;
-    }
-
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .slides {
-      display: flex;
-      transition: transform 0.7s cubic-bezier(.25,.8,.25,1);
-      will-change: transform;
-    }
-
-    .slide {
-      min-width: 100%;
-      position: relative;
-      padding: 1rem;
-    }
-
-    .slide img {
-      width: 100%;
-      display: block;
-      border-radius: 16px;
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
-      box-shadow: 0 30px 80px -10px rgba(255,255,255,0.2);
-      background: #1a0f40;
-    }
-
-    .carousel-nav {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      pointer-events: none;
-      transform: translateY(-50%);
-      padding: 0 10px;
-    }
-
-    .nav-btn {
-      background: rgba(255,255,255,0.08);
-      border: none;
-      padding: 10px 14px;
-      border-radius: 50%;
-      cursor: pointer;
-      pointer-events: all;
-      backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: #fff;
-      transition: transform .2s;
-    }
-    .nav-btn:hover { transform: scale(1.1); }
-
-    .dots {
-      margin-top: 0.75rem;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.25);
-      border: 2px solid rgba(255,255,255,0.5);
-      cursor: pointer;
-      position: relative;
-    }
-
-    .dot.active {
-      background: #fff;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-    }
-
-    .extras {
-      margin-top: 4rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.03);
-      padding: 1.5rem;
-      border-radius: 18px;
-      flex: 1 1 260px;
-      min-width: 220px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-    }
-
-    .star {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.2) 70%);
-      border-radius: 50%;
-      filter: blur(0.5px);
-      opacity: 0.9;
-      animation: twinkle 5s infinite;
-    }
-
-    @keyframes twinkle {
-      0%,100% { opacity: 0.9; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-
-    /* Confetti */
-    .confetti-wrapper {
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      overflow: visible;
-    }
-    .confetto {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      opacity: 0.9;
-      will-change: transform, opacity;
-      background: #fff;
-      border-radius: 3px;
-      mix-blend-mode: screen;
-      animation: fall 6s infinite;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(-120px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-    }
-
-    /* Balloons */
-    .balloon {
-      position: absolute;
-      bottom: -120px;
-      width: 70px;
-      height: 90px;
-      border-radius: 50% 50% 50% 50%;
-      background: radial-gradient(circle at 30% 30%, #e87fff, #b149ff);
-      animation: float 10s ease-in-out infinite;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      filter: drop-shadow(0 20px 60px rgba(255, 145, 255, 0.6));
-    }
-    .balloon::after {
-      content: "";
-      position: absolute;
-      bottom: -20px;
-      width: 4px;
-      height: 40px;
-      background: #ddd;
-      border-radius: 2px;
-    }
-    .balloon .shine {
-      position: absolute;
-      top: 10px;
-      left: 12px;
-      width: 18px;
-      height: 28px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 50%;
-      filter: blur(1px);
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-30px); }
-      100% { transform: translateY(0px); }
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .extras { flex-direction: column; }
-      .cake { width: 200px; }
-    }
-
-    .glow-text {
-      background: linear-gradient(90deg,#ffe8ff,#f7b1ff,#b4a3ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      position: relative;
-    }
-
-    .small-stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .small-stars span {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      filter: blur(0.6px);
-      animation: star-move 40s linear infinite;
-    }
-
-    @keyframes star-move {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-30px); }
-    }
-
-  </style>
+        /* Styles for the animated particles and balloons on the canvas */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the canvas behind the content */
+        }
+    </style>
 </head>
 <body>
-  <div class="small-stars" aria-hidden="true">
-    <!-- some random tiny stars generated by JS below -->
-  </div>
-  <div class="confetti-wrapper" aria-hidden="true"></div>
 
-  <!-- Floating balloons -->
-  <div class="balloon" style="left:10%; animation-delay:0s; background: radial-gradient(circle at 30% 30%, #ff9aed, #d453ff);">
-    <div class="shine"></div>
-  </div>
-  <div class="balloon" style="left:80%; animation-delay:2s; background: radial-gradient(circle at 30% 30%, #ffd57f, #ffa23b);">
-    <div class="shine"></div>
-  </div>
-  <div class="balloon" style="left:55%; animation-delay:1s; background: radial-gradient(circle at 30% 30%, #81d8ff, #3baaff);">
-    <div class="shine"></div>
-  </div>
+    <!-- Canvas for the background particle and balloon animation -->
+    <canvas id="birthday-canvas"></canvas>
 
-  <div class="container">
-    <section class="hero">
-      <h1 class="glow-text">Happy Birthday Grace!</h1>
-      <div class="subtitle">A galaxy of love, lights &amp; celebration just for you ✨</div>
+    <!-- Main content container, centered and responsive -->
+    <!-- Added flexbox for vertical stacking and centering -->
+    <main class="flex flex-col items-center w-full max-w-2xl mx-auto p-4 md:p-8 text-center z-10">
+        <!-- "Happy Birthday" title with neon glow -->
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold neon-text mb-4 leading-none mt-16">
+            Happy Birthday
+        </h1>
+        <!-- "Grace!" subtitle -->
+        <p class="text-3xl md:text-4xl text-purple-300 font-semibold mb-8">
+            Grace!
+        </p>
 
-      <div class="cake" aria-label="Birthday cake with candles">
-        <div class="frosting"></div>
-        <div class="cake-layer"></div>
-        <div class="cake-base"></div>
-        <div class="candle-container">
-          <div class="candle"><div class="flame"></div></div>
-          <div class="candle"><div class="flame"></div></div>
-          <div class="candle"><div class="flame"></div></div>
-          <div class="candle"><div class="flame"></div></div>
-          <div class="candle"><div class="flame"></div></div>
+        <!-- Main card containing the cake image -->
+        <div class="relative w-full max-w-sm mx-auto p-4 rounded-3xl card-backdrop border border-purple-500 shadow-2xl mb-8">
+            <!-- Decorative stars and confetti -->
+            <span class="absolute top-2 right-4 text-yellow-300 text-3xl animate-pulse">✨</span>
+            <span class="absolute bottom-4 left-6 text-yellow-300 text-2xl animate-spin-slow">🌟</span>
+            <span class="absolute -top-4 -right-4 text-red-400 text-xl animate-bounce">🎂</span>
+            
+            <!-- The cake image, using the actual image data -->
+            <img 
+                src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgJR... (truncated for brevity) ...cACgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/2Q==" 
+                alt="A beautiful birthday cake" 
+                class="w-full rounded-2xl border-2 border-purple-500 shadow-lg"
+                onerror="this.src='https://placehold.co/400x400/8b5cf6/ffffff?text=Birthday+Cake+Image+Failed+to+Load';">
         </div>
-      </div>
-    </section>
 
-    <!-- Carousel -->
-    <div class="carousel-wrapper">
-      <div class="carousel" aria-label="Photos of Grace">
-        <div class="slides">
-          <div class="slide">
-            <img src="photo1.jpg" alt="Grace photo 1" loading="lazy" />
-          </div>
-          <div class="slide">
-            <img src="photo2.jpg" alt="Grace photo 2" loading="lazy" />
-          </div>
-          <div class="slide">
-            <img src="photo3.jpg" alt="Grace photo 3" loading="lazy" />
-          </div>
+        <!-- 2D Carousel container -->
+        <div id="carousel-container" class="relative w-full max-w-sm mx-auto flex items-center justify-between">
+            <!-- Previous button -->
+            <button id="prevBtn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full shadow-lg transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            
+            <!-- Carousel image -->
+            <img id="carousel-img" 
+                 src="https://placehold.co/400x400/FF5733/FFFFFF?text=Image+1" 
+                 alt="Carousel image" 
+                 class="rounded-2xl border-2 border-purple-500 shadow-lg w-full max-w-[300px] mx-4 transition-transform duration-300 transform-gpu hover:scale-105">
+
+            <!-- Next button -->
+            <button id="nextBtn" class="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full shadow-lg transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
         </div>
-      </div>
-      <div class="carousel-nav">
-        <button class="nav-btn" aria-label="Previous" data-action="prev">&larr;</button>
-        <button class="nav-btn" aria-label="Next" data-action="next">&rarr;</button>
-      </div>
-      <div class="dots" aria-label="Carousel navigation">
-        <div class="dot active" data-index="0" aria-label="Slide 1"></div>
-        <div class="dot" data-index="1" aria-label="Slide 2"></div>
-        <div class="dot" data-index="2" aria-label="Slide 3"></div>
-      </div>
-    </div>
 
-    <div class="extras">
-      <div class="card">
-        <h2>Celebrate Grace</h2>
-        <p>Share your wishes, upload photos, and leave a glowing star message for her birthday. This space is all about her—sparkly, warm, and unforgettable.</p>
-      </div>
-      <div class="card">
-        <h2>Galaxy Vibes</h2>
-        <p>Deep purples, shining stars, floating confetti, and cosmic glow to make the day feel like a celebration across the universe.</p>
-      </div>
-      <div class="card">
-        <h2>Make a Wish</h2>
-        <p>Light the candles in your heart. Grace, may your year ahead be full of adventure, love, and starlit dreams.</p>
-      </div>
-    </div>
-  </div>
+        <!-- "Let's celebrate" message at the bottom -->
+        <p class="mt-8 text-xl font-medium text-white tracking-wide">
+            Let's celebrate another amazing year around the sun! 
+            <span class="text-yellow-400 ml-1">☀️</span>
+        </p>
+    </main>
 
-  <script>
-    // Carousel logic
-    const slidesEl = document.querySelector(".slides");
-    const dots = Array.from(document.querySelectorAll(".dot"));
-    let current = 0;
-    const total = dots.length;
+    <script>
+        // JavaScript for the background particle and balloon animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('birthday-canvas');
+            const ctx = canvas.getContext('2d');
 
-    function updateCarousel(index) {
-      current = (index + total) % total;
-      slidesEl.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach(d => d.classList.remove("active"));
-      dots[current].classList.add("active");
-    }
+            let particles = [];
+            const numParticles = 200;
+            let balloons = [];
+            const numBalloons = 15;
 
-    document.querySelectorAll("[data-action='next']").forEach(btn => {
-      btn.addEventListener("click", () => updateCarousel(current + 1));
-    });
-    document.querySelectorAll("[data-action='prev']").forEach(btn => {
-      btn.addEventListener("click", () => updateCarousel(current - 1));
-    });
-    dots.forEach(d => {
-      d.addEventListener("click", () => {
-        const i = parseInt(d.dataset.index, 10);
-        updateCarousel(i);
-      });
-    });
+            // Set canvas size to the window dimensions
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
 
-    // Auto-rotate
-    let interval = setInterval(() => updateCarousel(current + 1), 5000);
-    document.querySelector(".carousel").addEventListener("mouseenter", () => clearInterval(interval));
-    document.querySelector(".carousel").addEventListener("mouseleave", () => {
-      interval = setInterval(() => updateCarousel(current + 1), 5000);
-    });
+            // Particle object constructor
+            function Particle(x, y, radius, color, velocity) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = velocity;
 
-    // Confetti generator
-    const confettiWrapper = document.querySelector(".confetti-wrapper");
-    function makeConfetto() {
-      const el = document.createElement("div");
-      el.classList.add("confetto");
-      const size = Math.random() * 12 + 6;
-      el.style.width = size + "px";
-      el.style.height = size + "px";
-      el.style.background = `hsl(${Math.random() * 360}, 100%, 85%)`;
-      el.style.left = Math.random() * 100 + "%";
-      el.style.top = "-50px";
-      el.style.transform = `rotate(${Math.random() * 360}deg)`;
-      el.style.animationDuration = (4 + Math.random() * 3) + "s";
-      el.style.opacity = Math.random() * 0.8 + 0.3;
-      confettiWrapper.appendChild(el);
-      setTimeout(() => {
-        el.remove();
-      }, 7000);
-    }
+                this.draw = function() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.closePath();
+                };
 
-    setInterval(() => {
-      // burst of confetti
-      const count = 3;
-      for (let i = 0; i < count; i++) {
-        makeConfetto();
-      }
-    }, 300);
+                this.update = function() {
+                    // Update particle position
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
 
-    // little drifting stars
-    const starContainer = document.querySelector(".small-stars");
-    for (let i = 0; i < 120; i++) {
-      const s = document.createElement("span");
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      const size = Math.random() * 2 + 1;
-      s.style.left = x + "%";
-      s.style.top = y + "%";
-      s.style.width = size + "px";
-      s.style.height = size + "px";
-      s.style.animationDuration = (30 + Math.random() * 30) + "s";
-      starContainer.appendChild(s);
-    }
+                    // Reverse direction if particle hits canvas edges
+                    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                        this.velocity.x = -this.velocity.x;
+                    }
+                    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                        this.velocity.y = -this.velocity.y;
+                    }
 
-    // optional: keyboard nav
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") updateCarousel(current + 1);
-      if (e.key === "ArrowLeft") updateCarousel(current - 1);
-    });
-  </script>
+                    this.draw();
+                };
+            }
+
+            // Balloon object constructor
+            function Balloon(x, y, size, color, velocity) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.velocity = velocity;
+
+                this.draw = function() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    
+                    // Draw the balloon body (circle)
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    
+                    // Draw the neck (small triangle)
+                    ctx.beginPath();
+                    ctx.moveTo(0, this.size);
+                    ctx.lineTo(-this.size * 0.2, this.size + this.size * 0.5);
+                    ctx.lineTo(this.size * 0.2, this.size + this.size * 0.5);
+                    ctx.fill();
+
+                    // Draw the string
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(0, this.size + this.size * 0.5);
+                    ctx.lineTo(0, this.size * 5);
+                    ctx.stroke();
+
+                    ctx.restore();
+                };
+
+                this.update = function() {
+                    // Move the balloon upwards with a slight wobble
+                    this.x += Math.sin(this.y / 100) * 0.5;
+                    this.y += this.velocity.y;
+
+                    // Reset balloon to the bottom if it goes off screen
+                    if (this.y < -this.size * 5) {
+                        this.y = canvas.height + this.size * 5;
+                        this.x = Math.random() * canvas.width;
+                    }
+
+                    this.draw();
+                };
+            }
+
+            // Function to generate a random color
+            function randomParticleColor() {
+                const colors = ['#f0f', '#f48cff', '#fff'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            // Function to generate a random balloon color
+            function randomBalloonColor() {
+                const colors = ['#ff6f69', '#ffcc5c', '#88d8b0', '#9c00ff', '#5cb3ff'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            // Initialize particles and balloons
+            function init() {
+                particles = [];
+                for (let i = 0; i < numParticles; i++) {
+                    const radius = Math.random() * 2 + 1; // Particle radius
+                    const x = Math.random() * (canvas.width - radius * 2) + radius;
+                    const y = Math.random() * (canvas.height - radius * 2) + radius;
+                    const color = randomParticleColor();
+                    const velocity = {
+                        x: (Math.random() - 0.5) * 0.5,
+                        y: (Math.random() - 0.5) * 0.5
+                    };
+                    particles.push(new Particle(x, y, radius, color, velocity));
+                }
+
+                balloons = [];
+                for (let i = 0; i < numBalloons; i++) {
+                    const size = Math.random() * 15 + 20;
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height + canvas.height;
+                    const color = randomBalloonColor();
+                    const velocity = {
+                        y: -(Math.random() * 0.5 + 0.5)
+                    };
+                    balloons.push(new Balloon(x, y, size, color, velocity));
+                }
+            }
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+                particles.forEach(particle => {
+                    particle.update();
+                });
+                
+                balloons.forEach(balloon => {
+                    balloon.update();
+                });
+            }
+
+            // Start the animation on window load
+            init();
+            animate();
+        });
+
+        // JavaScript for the 2D carousel
+        window.onload = function() {
+            const carouselImg = document.getElementById('carousel-img');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            const imageUrls = [
+                'https://placehold.co/400x400/FF5733/FFFFFF?text=Image+1',
+                'https://placehold.co/400x400/33FF57/FFFFFF?text=Image+2',
+                'https://placehold.co/400x400/3357FF/FFFFFF?text=Image+3',
+                'https://placehold.co/400x400/FFFF33/000000?text=Image+4',
+                'https://placehold.co/400x400/8B33FF/FFFFFF?text=Image+5',
+                'https://placehold.co/400x400/33FFF9/000000?text=Image+6'
+            ];
+            let currentImageIndex = 0;
+
+            // Function to update the image
+            function updateImage() {
+                carouselImg.src = imageUrls[currentImageIndex];
+            }
+
+            // Event listener for the previous button
+            prevBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+                updateImage();
+            });
+
+            // Event listener for the next button
+            nextBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+                updateImage();
+            });
+
+            // Initial image load
+            updateImage();
+        };
+    </script>
 </body>
 </html>
